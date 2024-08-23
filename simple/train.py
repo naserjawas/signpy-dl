@@ -3,7 +3,9 @@ import matplotlib
 matplotlib.use("Agg")
 
 #
-from model.lenet import LeNet
+# from model.lenet import LeNet
+from model.rnn import RNN
+#
 from sklearn.metrics import classification_report
 from torch.utils.data import random_split
 from torch.utils.data import DataLoader
@@ -63,10 +65,13 @@ if __name__ == "__main__":
     valSteps = len(valDataLoader) // BATCH_SIZE
 
     #
-    print("[INFO] initialising the LeNet model...")
-    model = LeNet(
-                numChannels=1,
-                classes=len(trainData.dataset.classes)).to(device)
+    # print("[INFO] initialising the LeNet model...")
+    # model = LeNet(
+    #             numChannels=1,
+    #             classes=len(trainData.dataset.classes)).to(device)
+    print("[INFO] initialising the RNN model...")
+    model = RNN(classes=len(trainData.dataset.classes)).to(device)
+    #
 
     #
     opt = Adam(model.parameters(), lr=INIT_LR)
