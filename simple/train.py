@@ -1,5 +1,5 @@
 #
-import matplotlib 
+import matplotlib
 matplotlib.use("Agg")
 
 #
@@ -11,7 +11,6 @@ from torchvision.transforms import ToTensor
 from torchvision.datasets import KMNIST
 from torch.optim import Adam
 from torch import nn
-
 import matplotlib.pyplot as plt
 import numpy as np
 import argparse
