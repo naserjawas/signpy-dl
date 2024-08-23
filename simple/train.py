@@ -45,11 +45,13 @@ if __name__ == "__main__":
 
 
     #
+    # 1. for LeNet and RNN
     # print("[INFO] loading the KMNIST dataset...")
     # trainData = KMNIST(root="data", train=True, download=True,
     #                 transform=ToTensor())
     # testData = KMNIST(root="data", train=False, download=True,
     #                 transform=ToTensor())
+    # 2. for AlexNet
     transform = Compose([
         Grayscale(num_output_channels=3),
         Resize((63, 63)), ToTensor(),
