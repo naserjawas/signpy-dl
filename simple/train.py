@@ -5,6 +5,7 @@ matplotlib.use("Agg")
 #
 # from model.lenet import LeNet
 from model.rnn import RNN
+from model.alexnet import AlexNet
 #
 from sklearn.metrics import classification_report
 from torch.utils.data import random_split
@@ -69,8 +70,10 @@ if __name__ == "__main__":
     # model = LeNet(
     #             numChannels=1,
     #             classes=len(trainData.dataset.classes)).to(device)
-    print("[INFO] initialising the RNN model...")
-    model = RNN(classes=len(trainData.dataset.classes)).to(device)
+    # print("[INFO] initialising the RNN model...")
+    # model = RNN(classes=len(trainData.dataset.classes)).to(device)
+    print("[INFO] initialising the AlexNet model...")
+    model = AlexNet(classes=len(trainData.dataset.classes)).to(device)
     #
 
     #
