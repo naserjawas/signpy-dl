@@ -2,6 +2,9 @@ This source code example is taken from:
 https://pyimagesearch.com/2021/07/19/pytorch-training-your-first-convolutional-neural-network-cnn/
 It uses LeNet class.
 
-The RNN is adapted from:
+The RNN is adopted from:
 https://github.com/pytorch/examples/blob/main/mnist_rnn/main.py
+
+The AlexNet is adopted from:
+https://pytorch.org/vision/0.12/_modules/torchvision/models/alexnet.html
 
