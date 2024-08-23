@@ -10,11 +10,11 @@ from torch import flatten
 
 
 class AlexNet(Module):
-    def __init__(self, classes):
+    def __init__(self, numChannels, classes):
         super(AlexNet, self).__init__()
 
         self.features = Sequential(
-            Conv2d(in_channels=3, out_channels=64, kernel_size=11, stride=4, padding=2),
+            Conv2d(in_channels=numChannels, out_channels=64, kernel_size=11, stride=4, padding=2),
             ReLU(inplace=True),
             MaxPool2d(kernel_size=3, stride=2),
             Conv2d(in_channels=64, out_channels=192, kernel_size=5, padding=2),

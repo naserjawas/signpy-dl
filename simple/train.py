@@ -10,7 +10,10 @@ from model.alexnet import AlexNet
 from sklearn.metrics import classification_report
 from torch.utils.data import random_split
 from torch.utils.data import DataLoader
+from torchvision.transforms import Compose
 from torchvision.transforms import ToTensor
+from torchvision.transforms import Grayscale
+from torchvision.transforms import Resize
 from torchvision.datasets import KMNIST
 from torch.optim import Adam
 from torch import nn
@@ -40,12 +43,22 @@ if __name__ == "__main__":
     #
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+
     #
+    # print("[INFO] loading the KMNIST dataset...")
+    # trainData = KMNIST(root="data", train=True, download=True,
+    #                 transform=ToTensor())
+    # testData = KMNIST(root="data", train=False, download=True,
+    #                 transform=ToTensor())
+    transform = Compose([
+        Grayscale(num_output_channels=3),
+        Resize((63, 63)), ToTensor(),
+    ])
     print("[INFO] loading the KMNIST dataset...")
     trainData = KMNIST(root="data", train=True, download=True,
-                    transform=ToTensor())
+                    transform=transform)
     testData = KMNIST(root="data", train=False, download=True,
-                    transform=ToTensor())
+                    transform=transform)
 
     #
     print("[INFO] generating the train/validation split...")
@@ -73,7 +86,7 @@ if __name__ == "__main__":
     # print("[INFO] initialising the RNN model...")
     # model = RNN(classes=len(trainData.dataset.classes)).to(device)
     print("[INFO] initialising the AlexNet model...")
-    model = AlexNet(classes=len(trainData.dataset.classes)).to(device)
+    model = AlexNet(numChannels=3, classes=len(trainData.dataset.classes)).to(device)
     #
 
     #
