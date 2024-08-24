@@ -15,6 +15,7 @@ from torchvision.transforms import ToTensor
 from torchvision.transforms import Grayscale
 from torchvision.transforms import Resize
 from torchvision.datasets import KMNIST
+from torchvision.datasets import CIFAR10
 from torch.optim import Adam
 from torch import nn
 import matplotlib.pyplot as plt
@@ -54,12 +55,18 @@ if __name__ == "__main__":
     # 2. for AlexNet
     transform = Compose([
         Grayscale(num_output_channels=3),
-        Resize((3, 227, 227)), ToTensor(),
+        Resize((227, 227)),
+        ToTensor(),
     ])
-    print("[INFO] loading the KMNIST dataset...")
-    trainData = KMNIST(root="data", train=True, download=True,
+    # print("[INFO] loading the KMNIST dataset...")
+    # trainData = KMNIST(root="data", train=True, download=True,
+    #                 transform=transform)
+    # testData = KMNIST(root="data", train=False, download=True,
+    #                 transform=transform)
+    print("[INFO] loading the CIFAR10 dataset...")
+    trainData = CIFAR10(root="data", train=True, download=True,
                     transform=transform)
-    testData = KMNIST(root="data", train=False, download=True,
+    testData = CIFAR10(root="data", train=False, download=True,
                     transform=transform)
 
     #
