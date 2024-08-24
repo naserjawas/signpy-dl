@@ -3,10 +3,9 @@ import numpy as np
 np.random.seed(42)
 
 #
-from torch.utils.data import DataLoader
-from torch.utils.data import Subset
-from torchvision.transforms import ToTensor
-from torchvision.datasets import KMNIST
+import torch.utils.data as data
+from torchvision import transforms
+from torchvision import datasets
 import argparse
 import imutils
 import torch
@@ -23,13 +22,13 @@ if __name__ == "__main__":
 
     #
     print("[INFO] loading the KMNIST test dataset...")
-    testData = KMNIST(root="data", train=False, download=True,
-                      transform=ToTensor())
+    testData = datasets.KMNIST(root="data", train=False, download=True,
+                               transform=transforms.ToTensor())
     idxs = np.random.choice(range(0, len(testData)), size=(10,))
-    testData = Subset(testData, idxs)
+    testData = data.Subset(testData, idxs)
 
     #
-    testDataLoader = DataLoader(testData, batch_size=1)
+    testDataLoader = data.DataLoader(testData, batch_size=1)
 
     #
     model = torch.load(args["model"]).to(device)

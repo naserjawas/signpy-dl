@@ -7,17 +7,12 @@ matplotlib.use("Agg")
 from model.rnn import RNN
 from model.alexnet import AlexNet
 #
-from sklearn.metrics import classification_report
-from torch.utils.data import random_split
-from torch.utils.data import DataLoader
-from torchvision.transforms import Compose
-from torchvision.transforms import ToTensor
-from torchvision.transforms import Grayscale
-from torchvision.transforms import Resize
-from torchvision.datasets import KMNIST
-from torchvision.datasets import CIFAR10
-from torch.optim import Adam
-from torch import nn
+from sklearn import metrics
+from torchvision import transforms
+from torchvision import datasets
+import torch.utils.data as data
+import torch.optim as optim
+import torch.nn as nn
 import matplotlib.pyplot as plt
 import numpy as np
 import argparse
@@ -49,39 +44,39 @@ if __name__ == "__main__":
     # 1. for LeNet and RNN
     # print("[INFO] loading the KMNIST dataset...")
     # trainData = KMNIST(root="data", train=True, download=True,
-    #                 transform=ToTensor())
+    #                 transform=transforms.ToTensor())
     # testData = KMNIST(root="data", train=False, download=True,
-    #                 transform=ToTensor())
+    #                 transform=transforms.ToTensor())
     # 2. for AlexNet
-    transform = Compose([
-        Grayscale(num_output_channels=3),
-        Resize((227, 227)),
-        ToTensor(),
+    transform = transforms.Compose([
+        transforms.Grayscale(num_output_channels=3),
+        transforms.Resize((227, 227)),
+        transforms.ToTensor(),
     ])
     # print("[INFO] loading the KMNIST dataset...")
-    # trainData = KMNIST(root="data", train=True, download=True,
-    #                 transform=transform)
-    # testData = KMNIST(root="data", train=False, download=True,
-    #                 transform=transform)
+    # trainData = datasets.KMNIST(root="data", train=True, download=True,
+    #                             transform=transform)
+    # testData = datasets.KMNIST(root="data", train=False, download=True,
+    #                            transform=transform)
     print("[INFO] loading the CIFAR10 dataset...")
-    trainData = CIFAR10(root="data", train=True, download=True,
-                    transform=transform)
-    testData = CIFAR10(root="data", train=False, download=True,
-                    transform=transform)
+    trainData = datasets.CIFAR10(root="data", train=True, download=True,
+                                 transform=transform)
+    testData = datasets.CIFAR10(root="data", train=False, download=True,
+                                transform=transform)
 
     #
     print("[INFO] generating the train/validation split...")
     numTrainSamples = int(len(trainData) * TRAIN_SPLIT)
     numValSamples = int(len(trainData) * VAL_SPLIT)
-    (trainData, valData) = random_split(trainData,
+    (trainData, valData) = data.random_split(trainData,
                                         [numTrainSamples, numValSamples],
                                         generator=torch.Generator().manual_seed(42))
 
     #
-    trainDataLoader = DataLoader(trainData, shuffle=True,
+    trainDataLoader = data.DataLoader(trainData, shuffle=True,
                                 batch_size=BATCH_SIZE)
-    valDataLoader = DataLoader(valData, batch_size=BATCH_SIZE)
-    testDataLoader = DataLoader(testData, batch_size=BATCH_SIZE)
+    valDataLoader = data.DataLoader(valData, batch_size=BATCH_SIZE)
+    testDataLoader = data.DataLoader(testData, batch_size=BATCH_SIZE)
 
     #
     trainSteps = len(trainDataLoader) // BATCH_SIZE
@@ -99,7 +94,7 @@ if __name__ == "__main__":
     #
 
     #
-    opt = Adam(model.parameters(), lr=INIT_LR)
+    opt = optim.Adam(model.parameters(), lr=INIT_LR)
     lossFn = nn.NLLLoss()
 
     #
@@ -214,8 +209,9 @@ if __name__ == "__main__":
             preds.extend(pred.argmax(axis=1).cpu().numpy())
 
     #
-    print(classification_report(testData.targets.cpu().numpy(),
-                                np.array(preds), target_names=testData.classes))
+    print(metrics.classification_report(testData.targets.cpu().numpy(),
+                                        np.array(preds),
+                                        target_names=testData.classes))
 
     #
     plt.style.use("ggplot")
