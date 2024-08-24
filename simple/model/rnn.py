@@ -1,4 +1,4 @@
-import torcn.nn as nn
+import torch.nn as nn
 
 class RNN(nn.Module):
     def __init__(self, classes):
