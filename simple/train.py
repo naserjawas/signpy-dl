@@ -54,7 +54,7 @@ if __name__ == "__main__":
     # 2. for AlexNet
     transform = Compose([
         Grayscale(num_output_channels=3),
-        Resize((227, 227)), ToTensor(),
+        Resize((3, 227, 227)), ToTensor(),
     ])
     print("[INFO] loading the KMNIST dataset...")
     trainData = KMNIST(root="data", train=True, download=True,
