@@ -7,7 +7,7 @@ class ImageDataset(Dataset):
         self.images = os.listdir(image_folder)
 
     def __getitem__(self, idx):
-        image_file = self.imagges[idx]
+        image_file = self.images[idx]
 
     def __len__(self):
         return len(self.images)
