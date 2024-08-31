@@ -8,3 +8,5 @@ https://github.com/pytorch/examples/blob/main/mnist_rnn/main.py
 The AlexNet is adopted from:
 https://pytorch.org/vision/0.12/_modules/torchvision/models/alexnet.html
 
+Turoial for the code strcuture from stanford
+https://cs230.stanford.edu/blog/pytorch/
