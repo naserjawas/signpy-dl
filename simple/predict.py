@@ -67,3 +67,8 @@ if __name__ == "__main__":
                 gtLabel, predLabel))
             cv2.imshow("image", origImage)
             cv2.waitKey(0)
+
+
+"""
+This file is an example of predict using pytorch
+"""
