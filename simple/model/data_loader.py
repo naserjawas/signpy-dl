@@ -16,6 +16,11 @@ class ImageDataset(Dataset):
 """
 Notes dataset
 
+the data loader class should implement __init__, __getitem__, and __len__.
+__init__ is initialisation file that sets data directory, annotation file, and transform
+__getitem__ is a loader to get sample data.
+__len__ is a function to calculate the length of the data.
+
 the dataset contains:
     - train:
     - dev:
