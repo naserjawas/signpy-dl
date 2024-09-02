@@ -10,3 +10,7 @@ https://pytorch.org/vision/0.12/_modules/torchvision/models/alexnet.html
 
 Turoial for the code strcuture from stanford
 https://cs230.stanford.edu/blog/pytorch/
+
+
+Tutorial for basic dataloader
+https://pytorch.org/tutorials/beginner/basics/data_tutorial.html
